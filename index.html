@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhishek & Aditya Fitness | Ultimate Dashboard</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #ff4500;
+            --secondary: #ff8c00;
+            --bg-dark: #0a0a0a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
+        * { box-sizing: border-box; }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: var(--bg-dark); 
+            color: white; 
+            text-align: center; 
+            margin: 0; 
+            scroll-behavior: smooth;
+        }
+
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, #1a0f00 0%, #0a0a0a 100%);
+            z-index: -1;
+        }
+
+        nav { 
+            background: rgba(0,0,0,0.9); backdrop-filter: blur(10px);
+            padding: 20px; position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid var(--primary); 
+        }
+
+        nav a { 
+            color: white; text-decoration: none; margin: 0 15px; font-weight: 700; 
+            font-size: 0.8em; text-transform: uppercase; transition: 0.3s;
+        }
+        nav a:hover { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
+
+        .header-section { 
+            padding: 120px 20px; 
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover; background-position: center;
+        }
+
+        .profile-img { 
+            width: 160px; height: 160px; border-radius: 50%; border: 5px solid var(--primary); 
+            object-fit: cover; box-shadow: 0 0 30px rgba(255, 69, 0, 0.6);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .profile-img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px rgba(255, 69, 0, 0.9);
+        }
+
+        h1 { font-size: 3.5em; margin: 20px 0; font-weight: 900; text-transform: uppercase; }
+        .highlight { color: var(--primary); }
+
+        .btn-main {
+            padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: 900;
+            display: inline-flex; align-items: center; gap: 10px; transition: 0.4s; border: none; cursor: pointer;
+        }
+        .insta-btn { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); color: white; }
+        .reels-btn { background: white; color: black; }
+        .btn-main:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(255, 69, 0, 0.4); }
+
+        .section-padding { padding: 80px 20px; max-width: 1100px; margin: auto; }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+
+        .card { 
+            background: var(--card-bg); padding: 30px; border-radius: 20px; 
+            border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); transition: 0.3s;
+        }
+        .card:hover { border-color: var(--primary); transform: translateY(-5px); }
+
+        table { width: 100%; border-collapse: collapse; background: var(--glass); border-radius: 15px; overflow: hidden; margin-top: 20px; }
+        th { background: var(--primary); padding: 15px; }
+        td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+        input { 
+            width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #444; 
+            background: #111; color: white; margin-bottom: 15px; 
+        }
+        .details { display: none; padding: 15px; background: #000; border-radius: 10px; margin-top: 15px; }
+
+        .fade-in { opacity: 0; transform: translateY(30px); transition: 0.8s all ease-out; }
+        .visible { opacity: 1; transform: translateY(0); }
+
+        footer { padding: 60px; background: #050505; border-top: 3px solid var(--primary); margin-top: 80px; }
+
+        /* Video Styling */
+        .video-container {
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 20px rgba(255, 69, 0, 0.3);
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#workouts">Workouts</a>
+        <a href="#video-tips">Video Tips</a>
+        <a href="#routine">Routine</a>
+        <a href="#diet">Diet</a>
+        <a href="#tools">Tools</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <header id="home" class="header-section">
+        <img src="https://lh3.googleusercontent.com/d/1zvFhjGsYBdq7hoH4HQDfECDMYU6n8inp" alt="Abhishek" class="profile-img">
+        <h1>ABHISHEK <span class="highlight">FITNESS</span></h1>
+        <p style="font-size: 1.2em; opacity: 0.8;">Hard Work Beats Talent When Talent Doesn't Work Hard.</p>
+        <div style="margin-top: 30px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+            <a href="https://instagram.com/saraswat_abhi.0" target="_blank" class="btn-main insta-btn">
+                <i class="fab fa-instagram"></i> Follow Me
+            </a>
+            <a href="#workouts" class="btn-main reels-btn">
+                <i class="fas fa-play"></i> Get Started
+            </a>
+        </div>
+    </header>
+
+    <section id="workouts" class="section-padding fade-in">
+        <h2 style="font-size: 2.5em;">Workout <span class="highlight">Library</span></h2>
+        <div class="grid-container">
+            <div class="card">
+                <i class="fas fa-dumbbell" style="font-size: 2.5em; color: var(--primary);"></i>
+                <h3>Biceps Guide</h3>
+                <p>3D Visualization for perfect form.</p>
+                <button class="btn-main reels-btn" style="padding: 10px 20px; font-size: 0.8em;" onclick="toggle('tip1')">View 3D Model</button>
+                <div id="tip1" class="details">
+                    <model-viewer src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb" auto-rotate camera-controls style="width: 100%; height: 250px;"></model-viewer>
+                </div>
+            </div>
+            <div class="card">
+                <i class="fas fa-fire" style="font-size: 2.5em; color: var(--primary);"></i>
+                <h3>Fat Burn</h3>
+                <p>HIIT routines to melt fat quickly.</p>
+                <button class="btn-main reels-btn" style="padding: 10px 20px; font-size: 0.8em;" onclick="toggle('tip2')">Read Tips</button>
+                <div id="tip2" class="details">
+                    <p>Focus on short bursts of high intensity followed by brief rest periods.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="video-tips" class="section-padding fade-in">
+        <h2 style="font-size: 2.5em;">Pro <span class="highlight">Video Tips</span></h2>
+        <div class="grid-container">
+            <div class="card">
+                <div class="video-container">
+                    <iframe src="https://drive.google.com/file/d/1hny25kcnwQxAxNO4QsY0RPQkxoN5hqRD/preview" width="100%" height="480" allow="autoplay" style="border:none;"></iframe>
+                </div>
+                <h3 style="margin-top: 15px;">Fitness Tip #1</h3>
+                <p style="opacity: 0.8;">Ultimate motivation for your daily grind.</p>
+            </div>
+
+            <div class="card">
+                <div class="video-container">
+                    <iframe src="https://drive.google.com/file/d/16d0ZxFalfOOZjcd5mX_0f0CT48J4QMSw/preview" width="100%" height="480" allow="autoplay" style="border:none;"></iframe>
+                </div>
+                <h3 style="margin-top: 15px;">Fitness Tip #2</h3>
+                <p style="opacity: 0.8;">Consistency is the key to success.</p>
+            </div>
+
+            <div class="card">
+                <div class="video-container">
+                    <iframe src="https://drive.google.com/file/d/1WPYbfERyqHqYtgVOU7YK6IyQdhmalETs/preview" width="100%" height="480" allow="autoplay" style="border:none;"></iframe>
+                </div>
+                <h3 style="margin-top: 15px;">Advanced Training</h3>
+                <p style="opacity: 0.8;">Level up your workout routine.</p>
+            </div>
+
+            <div class="card">
+                <div class="video-container">
+                    <iframe src="https://drive.google.com/file/d/1Sw714mc1tI02bFCQmLkDrZpZsQJQX15p/preview" width="100%" height="480" allow="autoplay" style="border:none;"></iframe>
+                </div>
+                <h3 style="margin-top: 15px;">Pro Form Check</h3>
+                <p style="opacity: 0.8;">Master the technique like a pro.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="routine" class="section-padding fade-in">
+        <h2 style="font-size: 2.5em;">Weekly <span class="highlight">Schedule</span></h2>
+        <div style="overflow-x: auto;">
+            <table>
+                <thead>
+                    <tr><th>Day</th><th>Muscle Group</th><th>Best Exercise</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Monday</td><td>Chest & Triceps</td><td>Dumbbell Press</td></tr>
+                    <tr><td>Tuesday</td><td>Back & Biceps</td><td>Lat Pulldowns</td></tr>
+                    <tr><td>Wednesday</td><td>Legs</td><td>Barbell Squats</td></tr>
+                    <tr><td style="color: var(--primary);">Thursday</td><td colspan="2">Rest & Recovery</td></tr>
+                    <tr><td>Friday</td><td>Shoulders & Abs</td><td>Military Press</td></tr>
+                    <tr><td>Saturday</td><td>Full Body Blast</td><td>Burpees / Deadlift</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="diet" class="section-padding fade-in">
+        <h2 style="font-size: 2.5em;">Fuel <span class="highlight">Yourself</span></h2>
+        <div class="grid-container">
+            <div class="card" style="border-left: 5px solid #4CAF50;">
+                <h3>Veg Gain Plan</h3>
+                <ul style="text-align: left; line-height: 2;">
+                    <li>Paneer & Soya Chunks</li>
+                    <li>Oats & Peanut Butter</li>
+                    <li>Lentils (Dal) & Rice</li>
+                </ul>
+            </div>
+            <div class="card" style="border-left: 5px solid #f44336;">
+                <h3>Non-Veg Power</h3>
+                <ul style="text-align: left; line-height: 2;">
+                    <li>Chicken Breast & Eggs</li>
+                    <li>Grilled Fish & Salad</li>
+                    <li>Greek Yogurt & Berries</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="tools" class="section-padding fade-in">
+        <h2 style="font-size: 2.5em;">Fitness <span class="highlight">Tools</span></h2>
+        <div class="grid-container">
+            <div class="card">
+                <h3>BMI Calculator</h3>
+                <input type="number" id="w" placeholder="Weight (kg)">
+                <input type="number" id="h" placeholder="Height (cm)">
+                <button class="btn-main insta-btn" style="width: 100%; justify-content: center;" onclick="calcBMI()">Calculate</button>
+                <div id="bmi-res" style="margin-top: 15px; font-weight: bold;"></div>
+            </div>
+            <div class="card">
+                <h3>Water Tracker</h3>
+                <div style="font-size: 2.5em;" id="w-count">0</div>
+                <p>Glasses Today</p>
+                <button class="btn-main reels-btn" onclick="addW()">+ Add Glass</button>
+                <button class="btn-main" style="background: none; color: gray;" onclick="resetW()">Reset</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="privacy" class="section-padding fade-in">
+        <h2 style="font-size: 2.5em;">Privacy <span class="highlight">Policy</span></h2>
+        <div class="card" style="text-align: left; font-size: 0.9em; line-height: 1.6;">
+            <p><strong>Privacy Policy:</strong> Your data is safe with us. We do not store any personal info. BMI and Water Tracker data is processed only on your local device.</p>
+        </div>
+    </section>
+
+    <section id="contact" class="section-padding fade-in">
+        <div class="card">
+            <h2>Work With Us</h2>
+            <p>Managed by <span class="highlight">Aditya Singh</span></p>
+            <p>Email: <a href="mailto:abhisheksaraswat240@gmail.com" style="color: var(--primary);">abhisheksaraswat240@gmail.com</a></p>
+        </div>
+    </section>
+
+    <footer>
+        <p>Created with 🔥 by <span class="highlight">Abhishek & Aditya</span></p>
+    </footer>
+
+    <script>
+        function toggle(id) {
+            let x = document.getElementById(id);
+            x.style.display = (x.style.display === "block") ? "none" : "block";
+        }
+        function calcBMI() {
+            let weight = document.getElementById('w').value;
+            let height = document.getElementById('h').value / 100;
+            if(weight > 0 && height > 0) {
+                let bmi = (weight / (height * height)).toFixed(1);
+                document.getElementById('bmi-res').innerHTML = "Your BMI: " + bmi;
+            }
+        }
+        let count = 0;
+        function addW() { count++; document.getElementById('w-count').innerText = count; }
+        function resetW() { count = 0; document.getElementById('w-count').innerText = count; }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
